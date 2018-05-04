@@ -10,3 +10,5 @@ class Test(unittest.TestCase):
         roman_numerals_bag = RomanNumeralsBag()
         roman_numerals_bag.append('X')
         self.assertEqual(str(roman_numerals_bag), 'X')
+        roman_numerals_bag.append('L')
+        self.assertEqual(str(roman_numerals_bag), 'XL')
