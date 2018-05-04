@@ -11,6 +11,8 @@ class Test(unittest.TestCase):
         self.assertEqual(roman_numerals_bag.numeralsList, ['X'])
         roman_numerals_bag.append('L')
         self.assertEqual(roman_numerals_bag.numeralsList, ['X', 'L'])
+        roman_numerals_bag.append('II')
+        self.assertEqual(roman_numerals_bag.numeralsList, ['X', 'L', 'I', 'I'])
 
     def test_stringify(self):
         """Tests the output after performing basic insert operation on the Bag"""
