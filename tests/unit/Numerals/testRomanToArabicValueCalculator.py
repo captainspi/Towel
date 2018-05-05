@@ -6,7 +6,7 @@ from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
 class TestRomanToArabicValueConverter(TestCase):
     """"Tests the Roman to Arabic value converter"""
 
-    @patch('src.Numerals.RomanNumeralsBag.RomanNumeralsBag')
+    @patch('src.Numerals.Bag.RomanNumeralsBag.RomanNumeralsBag')
     def testConvertToArabicValue(self, roman_numerals_bag_mock_class: MagicMock):
         """Tests the method that converts Roman Numerals to the Arabic counterpart"""
         #Set up
