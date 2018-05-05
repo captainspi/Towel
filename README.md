@@ -15,8 +15,6 @@
    ```
 
 ###Running the unittests
-* Follow the steps for launching the app 
-  * Once in the dockerized environment, execute:
   ```
-  python -m unittest
+  docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:0.0.2 /bin/bash -c "python -m unittest discover" 
   ```
