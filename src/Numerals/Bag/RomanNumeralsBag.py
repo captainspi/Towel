@@ -11,9 +11,9 @@ class RomanNumeralsBag:
 
     def append_numeral(self, numeral: str) -> None:
         """Appends a numeral to the end of the internal collection"""
-        if not self.__is_valid_numeral(numeral):
+        if not self.__is_valid_numeral(numeral.capitalize()):
             raise RomanNumeralBagException("Numeral is invalid. Numeral: " + numeral)
-        self.__numerals_list.append(numeral)
+        self.__numerals_list.append(numeral.capitalize())
 
     def get_last_numeral(self) -> Optional[str]:
         """Returns the last numeral or false"""

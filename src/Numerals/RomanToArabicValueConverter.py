@@ -15,17 +15,18 @@ class RomanToArabicValueConverter:
 
         roman_numeral = self.__roman_numerals_bag.get_last_numeral()
         while roman_numeral:
-            current_arabic_value = self.map_to_arabic_value(roman_numeral)
-            total_arabic_value = self.sum(current_arabic_value, total_arabic_value)
+            current_arabic_value = self.__map_to_arabic_value(roman_numeral)
+            total_arabic_value = self.__sum(current_arabic_value, total_arabic_value)
+
             roman_numeral = self.__roman_numerals_bag.get_last_numeral()
 
         return total_arabic_value
 
-    def map_to_arabic_value(self, roman_numeral: str) -> int:
+    def __map_to_arabic_value(self, roman_numeral: str) -> int:
         """"Reutrns the Arabic value of a roman numeral"""
         return self.__roman_to_arabic_map[roman_numeral]
 
-    def sum(self, lhs_value: int, rhs_value: int) -> int:
+    def __sum(self, lhs_value: int, rhs_value: int) -> int:
         """Returns the sum of the lhs and rhs values based on roman calculations"""
         if lhs_value < rhs_value:
             return rhs_value - lhs_value
