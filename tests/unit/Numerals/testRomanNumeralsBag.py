@@ -1,8 +1,9 @@
-import unittest
+from unittest import TestCase
 from src.Numerals.RomanNumeralsBag import RomanNumeralsBag
 from src.Numerals.Exception import RomanNumeralException
 
-class Test(unittest.TestCase):
+
+class TestRomanNumeralsBag(TestCase):
     """ Tests the RomanNumeralsBag"""
 
     def test_append_numerals(self):
