@@ -7,20 +7,19 @@ class RomanNumeralsBag:
 
     def __init__(self):
         """ constructor """
-        self.__numeralsList = []
+        self.__numerals_list = []
 
     def append_numeral(self, numeral: str) -> None:
         """Appends a numeral to the end of the internal collection"""
         if not self.__is_valid_numeral(numeral):
             raise RomanNumeralException("Numeral is invalid. Numeral: " + numeral)
-        self.__numeralsList.append(numeral)
+        self.__numerals_list.append(numeral)
 
     def get_last_numeral(self) -> Optional[str]:
         """Returns the last numeral or false"""
-        if not self.__numeralsList:
+        if not self.__numerals_list:
             return None
-        return self.__numeralsList.pop()
-
+        return self.__numerals_list.pop()
 
     def __is_valid_numeral(self, numeral: str) -> bool:
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
@@ -29,7 +28,7 @@ class RomanNumeralsBag:
 
     def __str__(self) -> str:
         """Returns the stringified version of the internal list of numerals"""
-        return ''.join(self.__numeralsList)
+        return ''.join(self.__numerals_list)
 
 
 
