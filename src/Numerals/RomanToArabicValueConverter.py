@@ -7,7 +7,7 @@ class RomanToArabicValueConverter:
     def __init__(self, roman_numerals_bag: RomanNumeralsBag):
         """ constructor """
         self.__roman_numerals_bag = roman_numerals_bag
-        self.__roman_to_arabic_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 10000}
+        self.__roman_to_arabic_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 
     def convert(self) -> int:
         """" Converts the Roman Numerals sequence to its Arabic equivalent """
