@@ -1,2 +1,2 @@
-class RomanNumeralBagException(Exception):
+class RomanNumeralsBagException(Exception):
     """RomanNumeralsBag error class"""

@@ -1,6 +1,6 @@
 from unittest import TestCase
 from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
-from src.Numerals.Bag.Exception import RomanNumeralBagException
+from src.Numerals.Bag.Exception import RomanNumeralsBagException
 
 
 class TestRomanNumeralsBag(TestCase):
@@ -24,7 +24,7 @@ class TestRomanNumeralsBag(TestCase):
         self.assertEqual(str(roman_numerals_bag), 'XL')
 
     def test_exception_appending_invalid_numeral(self):
-        with self.assertRaises(RomanNumeralBagException) as context:
+        with self.assertRaises(RomanNumeralsBagException) as context:
             """Tests to make sure an exception is raised upon appending an invalid numeral"""
             roman_numerals_bag = RomanNumeralsBag()
             roman_numerals_bag.append_numeral('II')
