@@ -1,4 +1,4 @@
-from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
+import re
 
 
 class RomanNumeralsValidator:
@@ -11,15 +11,14 @@ class RomanNumeralsValidator:
     def validate(self, roman_numerals: str) -> bool:
         """" Validates roman numerals """
         self.__is_valid_numeral(roman_numerals)
-        if not self.__errors:
+        if self.__errors:
+            return False
+        else:
             return True
 
-    def __is_valid_numeral(self, numeral: str) -> bool:
+    def __is_valid_numeral(self, numeral: str):
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
-        allowed_roman_numerals = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
-        return numeral in allowed_roman_numerals
-
-
-
-
-
+        allowed_roman_numerals_pattern = '[^IVXLCDM]'
+        x = re.search(allowed_roman_numerals_pattern, numeral)
+        if x:
+            self.__errors.append('Error')

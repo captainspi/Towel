@@ -7,8 +7,8 @@ class TestRomanNumeralsValidator(TestCase):
 
     def testValidRomanNumeralsSet(self):
         """Tests the basic set of roman numerals for validity"""
-        data_provider = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
-        roman_numerals_validator = RomanNumeralsValidator()
+        data_provider = ['V', 'V', 'X', 'L', 'C', 'D', 'M', 'XL']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
+                roman_numerals_validator = RomanNumeralsValidator()
                 self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
