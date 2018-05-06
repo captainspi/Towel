@@ -1,4 +1,6 @@
 import re
+from src.Numerals.Validator.Error import Error
+from src.Numerals.Validator.Exception import RomanNumeralsValidatorException
 
 
 class RomanNumeralsValidator:
@@ -8,17 +10,17 @@ class RomanNumeralsValidator:
         """ constructor """
         self.__errors = []
 
-    def validate(self, roman_numerals: str) -> bool:
+    def validate(self, numeral_sequence: str) -> bool:
         """" Validates roman numerals """
-        self.__is_valid_numeral(roman_numerals)
+        self.__is_valid_set(numeral_sequence)
         if self.__errors:
-            return False
-        else:
-            return True
+            raise RomanNumeralsValidatorException(self.__errors)
 
-    def __is_valid_numeral(self, numeral: str):
+        return True
+
+    def __is_valid_set(self, numeral_sequence: str):
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
         allowed_roman_numerals_pattern = '[^IVXLCDM]'
-        x = re.search(allowed_roman_numerals_pattern, numeral)
+        x = re.search(allowed_roman_numerals_pattern, numeral_sequence)
         if x:
-            self.__errors.append('Error')
+            self.__errors.append(Error(Error.NUMERAL_SET, numeral_sequence))
