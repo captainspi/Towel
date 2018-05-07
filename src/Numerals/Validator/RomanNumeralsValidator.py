@@ -46,7 +46,12 @@ class RomanNumeralsValidator:
         if dlv_repetition_error:
             self.__errors.append(Error(Error.INVALID_REPETITION_D_L_V, numeral_sequence))
 
-        xcm_disallowed_four_in_a_row_pattern = 'X{4,}|C{4,}|M{4,}'
-        xcm_disallowed_four_in_a_row_error = re.search(xcm_disallowed_four_in_a_row_pattern, numeral_sequence)
-        if xcm_disallowed_four_in_a_row_error:
-            self.__errors.append(Error(Error.INVALID_REPETITION_FOUR_IN_A_ROW_X_C_M, numeral_sequence))
+        ixcm_disallowed_four_in_a_row_pattern = 'I{4,}|X{4,}|C{4,}|M{4,}'
+        ixcm_disallowed_four_in_a_row_error = re.search(ixcm_disallowed_four_in_a_row_pattern, numeral_sequence)
+        if ixcm_disallowed_four_in_a_row_error:
+            self.__errors.append(Error(Error.INVALID_REPETITION_FOUR_IN_A_ROW_I_X_C_M, numeral_sequence))
+
+        xcm_disallowed_four_inconsecutive_pattern = 'X{3}VX|C{3}[IVL]C|M{3}[IVXLD]M'
+        xcm_disallowed_four_inconsecutive_error = re.search(xcm_disallowed_four_inconsecutive_pattern, numeral_sequence)
+        if xcm_disallowed_four_inconsecutive_error:
+            self.__errors.append(Error(Error.INVALID_REPETITION_INCONSECUTIVE_IN_A_ROW_X_C_M, numeral_sequence))
