@@ -1,4 +1,4 @@
-from src.Numerals.Bag.Exception import RomanNumeralBagException
+from src.Numerals.Bag.Exception import RomanNumeralsBagException
 from typing import Optional
 
 
@@ -12,7 +12,7 @@ class RomanNumeralsBag:
     def append_numeral(self, numeral: str) -> None:
         """Appends a numeral to the end of the internal collection"""
         if not self.__is_valid_numeral(numeral.capitalize()):
-            raise RomanNumeralBagException("Numeral is invalid. Numeral: " + numeral)
+            raise RomanNumeralsBagException("Numeral is invalid. Numeral: " + numeral)
         self.__numerals_list.append(numeral.capitalize())
 
     def get_last_numeral(self) -> Optional[str]:
