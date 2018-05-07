@@ -14,10 +14,18 @@ class RomanNumeralsValidator:
         """" Validates roman numerals """
         self.__validate_set(numeral_sequence)
         self.__validate_subtraction(numeral_sequence)
+        self.__validate_repetitions(numeral_sequence)
         if self.__errors:
             raise RomanNumeralsValidatorException(self.__errors)
 
         return True
+
+    def __validate_set(self, numeral_sequence: str):
+        """Verifies if the numeral belongs to a list of valid roman numeral types"""
+        allowed_roman_numerals_pattern = '[^IVXLCDM]'
+        x = re.search(allowed_roman_numerals_pattern, numeral_sequence)
+        if x:
+            self.__errors.append(Error(Error.INVALID_NUMERAL, numeral_sequence))
 
     def __validate_subtraction(self, numeral_sequence: str):
         """"Verifies if the order of numerals for subtraction is correct"""
@@ -31,9 +39,9 @@ class RomanNumeralsValidator:
         if ixc_subtractions_error:
             self.__errors.append(Error(Error.INVALID_SUBTRACTION_IXC, numeral_sequence))
 
-    def __validate_set(self, numeral_sequence: str):
+    def __validate_repetitions(self, numeral_sequence: str):
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
-        allowed_roman_numerals_pattern = '[^IVXLCDM]'
-        x = re.search(allowed_roman_numerals_pattern, numeral_sequence)
+        disallowed_repetitions_pattern = 'D{2,}|L{2,}|V{2,}'
+        x = re.search(disallowed_repetitions_pattern, numeral_sequence)
         if x:
-            self.__errors.append(Error(Error.NUMERAL_SET, numeral_sequence))
+            self.__errors.append(Error(Error.INVALID_REPETITION_D_L_V, numeral_sequence))
