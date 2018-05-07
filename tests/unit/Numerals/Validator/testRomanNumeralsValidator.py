@@ -15,7 +15,7 @@ class TestRomanNumeralsValidator(TestCase):
                 self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
 
     def test_valid_repetitions(self):
-        """Tests the basic set of roman numerals for validity"""
+        """Tests the correct set of repetitive roman numerals for validity"""
         data_provider = ['III', 'XXX', 'CCC', 'MMM', 'XXXIX', 'CCCXC', 'MMMCM']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
@@ -23,8 +23,16 @@ class TestRomanNumeralsValidator(TestCase):
                 self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
 
     def test_valid_subtractions(self):
-        """Tests the basic set of roman numerals for validity"""
+        """Tests the correct set of roman numerals for subtractive validity"""
         data_provider = ['IV', 'IX', 'XL', 'XC', 'CD', 'CM']
+        for test_number in range(data_provider.__len__()):
+            with self.subTest(i=test_number):
+                roman_numerals_validator = RomanNumeralsValidator()
+                self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
+
+    def test_valid_addition(self):
+        """Tests the correct set of roman numerals for additive validity"""
+        data_provider = ['II', 'VI', 'XI', 'XV', 'XX', 'LI', 'LV', 'LX', 'CI', 'CV', 'CX', 'CL', 'CC', 'DI', 'DV', 'DX', 'DL', 'DC', 'MI', 'MV', 'MX', 'ML', 'MC', 'MD', 'MM']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 roman_numerals_validator = RomanNumeralsValidator()
