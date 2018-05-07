@@ -23,9 +23,18 @@ class TestRomanNumeralsValidator(TestCase):
                     roman_numerals_validator = RomanNumeralsValidator()
                     self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
 
-    def test_exception_invalid_repititions_of_D_L_V(self):
-        """Tests the roman sequence for invalid repititions"""
+    def test_exception_invalid_repetitions_of_D_L_V(self):
+        """Tests the roman sequence for invalid repetitions"""
         data_provider = ['DD', 'LL', 'VV']
+        for test_number in range(data_provider.__len__()):
+            with self.subTest(i=test_number):
+                with self.assertRaises(RomanNumeralsValidatorException) as context:
+                    roman_numerals_validator = RomanNumeralsValidator()
+                    self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
+
+    def test_exception_invalid_repetition_in_fours_or_more_X_C_M(self):
+        """Tests the roman sequence for invalid repetitions"""
+        data_provider = ['XXX', 'CCC', 'MMM']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 with self.assertRaises(RomanNumeralsValidatorException) as context:
