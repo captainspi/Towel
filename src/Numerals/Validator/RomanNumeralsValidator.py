@@ -51,7 +51,7 @@ class RomanNumeralsValidator:
         if ixcm_disallowed_four_in_a_row_error:
             self.__errors.append(Error(Error.INVALID_REPETITION_FOUR_IN_A_ROW_I_X_C_M, numeral_sequence))
 
-        xcm_disallowed_four_inconsecutive_pattern = 'X{3}VX|C{3}[IVL]C|M{3}[IVXLD]M'
+        xcm_disallowed_four_inconsecutive_pattern = 'X{3}VX|X{3}IX{2,}|C{3}[IVL]C|C{3}XC{2,}|M{3}[IVXLD]M|M{3}CM{2,}'
         xcm_disallowed_four_inconsecutive_error = re.search(xcm_disallowed_four_inconsecutive_pattern, numeral_sequence)
         if xcm_disallowed_four_inconsecutive_error:
             self.__errors.append(Error(Error.INVALID_REPETITION_INCONSECUTIVE_IN_A_ROW_X_C_M, numeral_sequence))

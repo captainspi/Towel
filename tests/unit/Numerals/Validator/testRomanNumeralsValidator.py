@@ -32,9 +32,9 @@ class TestRomanNumeralsValidator(TestCase):
                     roman_numerals_validator = RomanNumeralsValidator()
                     self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
 
-    def test_exception_invalid_repetition_in_fours_or_more_X_C_M(self):
+    def test_exception_invalid_repetition_in_fours_or_more_I_X_C_M(self):
         """Tests the roman sequence for invalid repetitions"""
-        data_provider = ['XXXX', 'CCCC', 'MMMM']
+        data_provider = ['IIII', 'XXXX', 'CCCC', 'MMMM']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 with self.assertRaises(RomanNumeralsValidatorException) as context:
@@ -43,8 +43,10 @@ class TestRomanNumeralsValidator(TestCase):
 
     def test_invalid_repetition_inconsecutive_fours_X_C_M(self):
         """Tests the roman sequence for invalid repetitions"""
-        data_provider = ['XXXVX', 'CCCIC', 'CCCLC', 'CCCVC', 'MMMIM', 'MMMVM', 'MMMXM', 'MMMLM', 'MMMDM']
-        #TODO: check for valid inconsecutive repitions where X C M count is > 4
+        data_provider = [
+            'XXXVX', 'CCCIC', 'CCCLC', 'CCCVC', 'MMMIM', 'MMMVM', 'MMMXM', 'MMMLM', 'MMMDM'
+            'XXXIXX', 'CCCXCC', 'MMMCMM'
+        ]
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 with self.assertRaises(RomanNumeralsValidatorException) as context:
