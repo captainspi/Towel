@@ -14,6 +14,14 @@ class TestRomanNumeralsValidator(TestCase):
                 roman_numerals_validator = RomanNumeralsValidator()
                 self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
 
+    def test_valid_repetitions(self):
+        """Tests the basic set of roman numerals for validity"""
+        data_provider = ['III', 'XXX', 'CCC', 'MMM', 'XXXIX', 'CCCXC', 'MMMCM']
+        for test_number in range(data_provider.__len__()):
+            with self.subTest(i=test_number):
+                roman_numerals_validator = RomanNumeralsValidator()
+                self.assertTrue(roman_numerals_validator.validate(data_provider.pop()), True)
+
     def test_exception_invalid_numeral_set(self):
         """Tests the basic set of roman numerals for validity"""
         data_provider = ['A', 'VA', 'AV', 'LZX', 'IC']

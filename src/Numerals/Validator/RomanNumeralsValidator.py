@@ -34,7 +34,7 @@ class RomanNumeralsValidator:
         if vld_subtraction_error:
             self.__errors.append(Error(Error.INVALID_SUBTRACTION_VLD, numeral_sequence))
 
-        ix_disallowed_subtractions_pattern = 'X[DM]|I[^VX]'
+        ix_disallowed_subtractions_pattern = 'X[DM]|I[LCDM]'
         ix_subtractions_error = re.search(ix_disallowed_subtractions_pattern, numeral_sequence)
         if ix_subtractions_error:
             self.__errors.append(Error(Error.INVALID_SUBTRACTION_IX, numeral_sequence))
