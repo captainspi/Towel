@@ -22,26 +22,31 @@ class RomanNumeralsValidator:
 
     def __validate_set(self, numeral_sequence: str):
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
-        allowed_roman_numerals_pattern = '[^IVXLCDM]'
-        x = re.search(allowed_roman_numerals_pattern, numeral_sequence)
-        if x:
+        disallowed_roman_numerals_pattern = '[^IVXLCDM]'
+        disallowed_roman_numerals_error = re.search(disallowed_roman_numerals_pattern, numeral_sequence)
+        if disallowed_roman_numerals_error:
             self.__errors.append(Error(Error.INVALID_NUMERAL, numeral_sequence))
 
     def __validate_subtraction(self, numeral_sequence: str):
         """"Verifies if the order of numerals for subtraction is correct"""
-        vld_subtractions_pattern = 'V[X|L|C|D|M]|L[C|D|M]|DM'
-        vld_subtraction_error = re.search(vld_subtractions_pattern, numeral_sequence)
+        vld_disallowed_subtractions_pattern = 'V[X|L|C|D|M]|L[C|D|M]|DM'
+        vld_subtraction_error = re.search(vld_disallowed_subtractions_pattern, numeral_sequence)
         if vld_subtraction_error:
             self.__errors.append(Error(Error.INVALID_SUBTRACTION_VLD, numeral_sequence))
 
-        ixc_subtractions_pattern = 'X[DM]|I[^VX]'
-        ixc_subtractions_error = re.search(ixc_subtractions_pattern, numeral_sequence)
-        if ixc_subtractions_error:
-            self.__errors.append(Error(Error.INVALID_SUBTRACTION_IXC, numeral_sequence))
+        ix_disallowed_subtractions_pattern = 'X[DM]|I[^VX]'
+        ix_subtractions_error = re.search(ix_disallowed_subtractions_pattern, numeral_sequence)
+        if ix_subtractions_error:
+            self.__errors.append(Error(Error.INVALID_SUBTRACTION_IX, numeral_sequence))
 
     def __validate_repetitions(self, numeral_sequence: str):
         """Verifies if the numeral belongs to a list of valid roman numeral types"""
-        disallowed_repetitions_pattern = 'D{2,}|L{2,}|V{2,}'
-        x = re.search(disallowed_repetitions_pattern, numeral_sequence)
-        if x:
+        dlv_disallowed_repetitions_pattern = 'D{2,}|L{2,}|V{2,}'
+        dlv_repetition_error = re.search(dlv_disallowed_repetitions_pattern, numeral_sequence)
+        if dlv_repetition_error:
             self.__errors.append(Error(Error.INVALID_REPETITION_D_L_V, numeral_sequence))
+
+        xcm_disallowed_four_in_a_row_pattern = 'X{4,}|C{4,}|M{4,}'
+        xcm_disallowed_four_in_a_row_error = re.search(xcm_disallowed_four_in_a_row_pattern, numeral_sequence)
+        if xcm_disallowed_four_in_a_row_error:
+            self.__errors.append(Error(Error.INVALID_REPETITION_FOUR_IN_A_ROW_X_C_M, numeral_sequence))

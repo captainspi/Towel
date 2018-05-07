@@ -34,7 +34,7 @@ class TestRomanNumeralsValidator(TestCase):
 
     def test_exception_invalid_repetition_in_fours_or_more_X_C_M(self):
         """Tests the roman sequence for invalid repetitions"""
-        data_provider = ['XXX', 'CCC', 'MMM']
+        data_provider = ['XXXX', 'CCCC', 'MMMM']
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 with self.assertRaises(RomanNumeralsValidatorException) as context:
