@@ -1,4 +1,4 @@
-from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBagget_last_numeral
+from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
 
 
 class RomanToArabicValueConverter:
