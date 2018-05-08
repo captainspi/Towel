@@ -1,3 +1,4 @@
+from src.Numerals.Bank.Exception import ExchangeRateNotFoundException
 from src.Numerals.Bank.Money.Money import Money
 
 
@@ -11,7 +12,12 @@ class Bank:
     def add_rate(self, from_currency: str, to_currency: str, rate: int) -> None:
         """" Adds a rate for a given currency. Rate can only be an int,
         we assume loose change was the weakness of humanity and aliens were too smart to ever want any. """
-        self.__rates.update({from_currency.upper(): {to_currency.upper(): rate}})
+        to_rates = {}
+        if from_currency.upper() in self.__rates:
+            to_rates = self.__rates[from_currency.upper()]
+
+        to_rates.update({to_currency.upper(): rate})
+        self.__rates.update({from_currency.upper(): to_rates})
 
     def convert_to(self, to_currency: str, money: Money) -> Money:
         converted_money = Money(money.get_amount(), to_currency)
@@ -23,9 +29,4 @@ class Bank:
         if from_currency.upper() in self.__rates and to_currency.upper() in self.__rates[from_currency]:
             return self.__rates[from_currency.upper()][to_currency.upper()]
 
-
-
-
-
-
-
+        raise ExchangeRateNotFoundException
