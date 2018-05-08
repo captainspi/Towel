@@ -20,6 +20,7 @@ class Bank:
         self.__rates.update({from_currency.upper(): to_rates})
 
     def convert_to(self, to_currency: str, money: Money) -> Money:
+        """Converts the money to the assigned currency"""
         converted_money = Money(money.get_amount(), to_currency)
         converted_money.multiply(self.__get_exchange_rate(money.get_currency(), to_currency))
         return converted_money
