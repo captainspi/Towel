@@ -1,7 +1,7 @@
 from unittest import TestCase
-from src.Numerals.Bank.Bank import Bank
-from src.Numerals.Bank.Exception import ExchangeRateNotFoundException
-from src.Numerals.Bank.Money.Money import Money
+from src.Bank.Bank import Bank
+from src.Bank.Exception import ExchangeRateNotFoundException
+from src.Bank.Money.Money import Money
 
 
 class TestBank(TestCase):

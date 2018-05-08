@@ -1,5 +1,5 @@
-from src.Numerals.Bank.Exception import ExchangeRateNotFoundException
-from src.Numerals.Bank.Money.Money import Money
+from src.Bank.Exception import ExchangeRateNotFoundException
+from src.Bank.Money.Money import Money
 
 
 class Bank:
