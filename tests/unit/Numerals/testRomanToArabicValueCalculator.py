@@ -1,5 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
+
+from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
 
 
@@ -29,7 +31,7 @@ class TestRomanToArabicValueConverter(TestCase):
                 expected_get_last_numeral_calls = [call(), call()]
 
                 # Exercise
-                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock)
+                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock, RomanToArabicValueMapper())
                 converted_value = to_arabic_value_converter.convert()
 
                 # Verify
