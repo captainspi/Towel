@@ -23,7 +23,7 @@ class TestRomanToArabicValueMapper(TestCase):
                 mapper = RomanToArabicValueMapper()
 
                 # Exercise
-                mapped_value = mapper.map_numeral(data_provider[test_number]['roman_value'])
+                mapped_value = mapper.get_mapped_numeral(data_provider[test_number]['roman_value'])
 
                 # Verify
                 self.assertEqual(mapped_value, data_provider[test_number]["expected_converted_value"])
@@ -32,4 +32,4 @@ class TestRomanToArabicValueMapper(TestCase):
         """Tests the mapping class for exception upon invalid mapping"""
         with self.assertRaises(InvalidNumeralMappingException) as context:
             mapper = RomanToArabicValueMapper()
-            mapper.map_numeral('Z')
+            mapper.get_mapped_numeral('Z')

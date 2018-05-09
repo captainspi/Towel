@@ -30,7 +30,7 @@ class RomanToArabicValueConverter:
 
     def __map_to_arabic_value(self, roman_numeral: str) -> int:
         """"Reutrns the Arabic value of a roman numeral"""
-        return int(self.__roman_to_arabic_mapper.map_numeral(roman_numeral))
+        return int(self.__roman_to_arabic_mapper.get_mapped_numeral(roman_numeral))
 
     def __sum(self, lhs_value: int, rhs_value: int) -> int:
         """Returns the sum of the lhs and rhs values based on roman calculations"""
