@@ -8,7 +8,7 @@ class RomanToArabicValueMapper:
         """Constructor"""
         self.__map = {'I': '1', 'V': '5', 'X': '10', 'L': '50', 'C': '100', 'D': '500', 'M': '1000'}
 
-    def map(self, roman_number: str) -> str:
+    def map_numeral(self, roman_number: str) -> str:
         """Maps a Roman Numeral to its Arabic Value"""
         if roman_number in self.__map:
             return self.__map[roman_number]

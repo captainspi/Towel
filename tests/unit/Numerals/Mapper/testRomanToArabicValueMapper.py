@@ -22,7 +22,8 @@ class TestRomanToArabicValueMapper(TestCase):
                 mapper = RomanToArabicValueMapper()
 
                 # Exercise
-                mapped_value = mapper.map(data_provider[test_number]['roman_value'])
+                mapped_value = mapper.map_numeral(data_provider[test_number]['roman_value'])
 
                 # Verify
                 self.assertEqual(mapped_value, data_provider[test_number]["expected_converted_value"])
+
