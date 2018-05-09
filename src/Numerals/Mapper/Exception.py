@@ -1,5 +1,5 @@
 class InvalidNumeralMappingException(Exception):
-    """Validation error class"""
+    """Validation exception class"""
 
     def __init__(self, value):
         """Create a ValidationError"""

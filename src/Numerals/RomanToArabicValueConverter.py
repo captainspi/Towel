@@ -1,4 +1,6 @@
 from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
+from src.Numerals.Exception import RomanToArabicValueConverterException
+from src.Numerals.Mapper.Exception import InvalidNumeralMappingException
 from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 
 
@@ -16,10 +18,13 @@ class RomanToArabicValueConverter:
 
         roman_numeral = self.__roman_numerals_bag.get_last_numeral()
         while roman_numeral:
-            current_arabic_value = self.__map_to_arabic_value(roman_numeral)
-            total_arabic_value = self.__sum(current_arabic_value, total_arabic_value)
+            try:
+                current_arabic_value = self.__map_to_arabic_value(roman_numeral)
+                total_arabic_value = self.__sum(current_arabic_value, total_arabic_value)
 
-            roman_numeral = self.__roman_numerals_bag.get_last_numeral()
+                roman_numeral = self.__roman_numerals_bag.get_last_numeral()
+            except InvalidNumeralMappingException as e:
+                raise RomanToArabicValueConverterException from e
 
         return total_arabic_value
 
