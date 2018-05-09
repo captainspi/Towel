@@ -1,4 +1,5 @@
 from unittest import TestCase
+from src.Numerals.Mapper.Exception import InvalidNumeralMappingException
 from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 
 
@@ -27,3 +28,8 @@ class TestRomanToArabicValueMapper(TestCase):
                 # Verify
                 self.assertEqual(mapped_value, data_provider[test_number]["expected_converted_value"])
 
+    def test_invalid_mapping_exception(self):
+        """Tests the mapping class for exception upon invalid mapping"""
+        with self.assertRaises(InvalidNumeralMappingException) as context:
+            mapper = RomanToArabicValueMapper()
+            mapper.map_numeral('Z')
