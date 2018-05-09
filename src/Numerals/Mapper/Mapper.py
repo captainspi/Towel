@@ -2,6 +2,7 @@ from src.Numerals.Mapper.Exception import InvalidNumeralMappingException
 
 
 class Mapper:
+    """This should be protected technically. But Python problems :("""
     map = {}
 
     def get_mapped_numeral(self, numeral: str) -> str:
@@ -11,6 +12,6 @@ class Mapper:
 
         raise InvalidNumeralMappingException(numeral)
 
-    def map_numeral(self, from_numeral: str, to_numeral: str):
+    def map_numeral(self, from_numeral: str, to_numeral: str) -> None:
         """Maps numerals"""
         self.map.update({from_numeral.upper(): to_numeral.upper()})
