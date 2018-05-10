@@ -12,8 +12,8 @@ class RegexTokenizer(Tokenizer):
         map_to_roman_numeral_pattern = "([^ ]+) is ([^ ]+)"
         match = re.match(map_to_roman_numeral_pattern, query)
         if match:
-            from_numeral = match.group(1).strip()
-            to_numeral = match.group(2).strip()
+            from_numeral = match.group(1).strip().upper()
+            to_numeral = match.group(2).strip().upper()
             return Tokens(self.MAP_TO_ROMAN_NUMERAL_PATTERN, mapped_numeral={"from_numeral": from_numeral, "to_numeral": to_numeral})
 
         return None
@@ -23,12 +23,12 @@ class RegexTokenizer(Tokenizer):
         initialize_currency_rate_pattern = "(.*) ([A-Z][a-z]+) is (\d+) Credits"
         match = re.match(initialize_currency_rate_pattern, query)
         if match:
-            currency = match.group(2).strip()
+            currency = match.group(2).strip().upper()
             value = float(match.group(3))
 
             numerals = match.group(1).strip().split(" ")
             for i in range(0, len(numerals)):
-                numerals[i] = numerals[i].strip()
+                numerals[i] = numerals[i].strip().upper()
 
             return Tokens(self.INITIALIZE_CURRENCY_RATE_PATTERN, currency=currency, value=value, numerals=numerals)
 
@@ -41,7 +41,7 @@ class RegexTokenizer(Tokenizer):
         if match:
             numerals = match.group(1).strip().split(" ")
             for i in range(0, len(numerals)):
-                numerals[i] = numerals[i].strip()
+                numerals[i] = numerals[i].strip().upper()
 
             return Tokens(self.CONVERT_TO_ARABIC_NUMERAL_PATTERN, numerals=numerals)
 
@@ -52,10 +52,10 @@ class RegexTokenizer(Tokenizer):
         convert_money_pattern = "how many Credits is (.*) ([A-Z].*) \?"
         match = re.match(convert_money_pattern, query)
         if match:
-            currency = match.group(2).strip()
+            currency = match.group(2).strip().upper()
             numerals = match.group(1).strip().split(" ")
             for i in range(0, len(numerals)):
-                numerals[i] = numerals[i].strip()
+                numerals[i] = numerals[i].strip().upper()
 
             return Tokens(self.CONVERT_MONEY_PATTERN, numerals=numerals, currency=currency)
 

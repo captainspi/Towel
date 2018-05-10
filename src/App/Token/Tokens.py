@@ -1,6 +1,6 @@
 class Tokens:
     """"Contains a bunch of tokens"""
-    def __init__(self, pattern_type: str, numerals: list = [], mapped_numeral: dict = {}, value: float = 0.00, currency: str = ""):
+    def __init__(self, pattern_type: str, numerals: list = [], mapped_numeral: dict = {}, value: float = None, currency: str = ""):
         """"Constructor"""
         self.__pattern_type = pattern_type
         self.__currency = currency
