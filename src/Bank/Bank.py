@@ -9,9 +9,8 @@ class Bank:
         """ Bank """
         self.__rates = {}
 
-    def add_rate(self, from_currency: str, to_currency: str, rate: int) -> None:
-        """" Adds a rate for a given currency. Rate can only be an int,
-        we assume loose change was the weakness of humanity and aliens were too smart to ever want any. """
+    def add_rate(self, from_currency: str, to_currency: str, rate: float) -> None:
+        """" Adds a rate for a given currency."""
         to_rates = {}
         if from_currency.upper() in self.__rates:
             to_rates = self.__rates[from_currency.upper()]
@@ -25,7 +24,7 @@ class Bank:
         converted_money.multiply(self.__get_exchange_rate(money.get_currency(), to_currency))
         return converted_money
 
-    def __get_exchange_rate(self, from_currency: str, to_currency: str) -> int:
+    def __get_exchange_rate(self, from_currency: str, to_currency: str) -> float:
         """Returns the exchange rate if available"""
         if from_currency.upper() in self.__rates and to_currency.upper() in self.__rates[from_currency]:
             return self.__rates[from_currency.upper()][to_currency.upper()]
