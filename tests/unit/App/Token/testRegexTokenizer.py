@@ -1,9 +1,9 @@
 from unittest import TestCase
-from src.App.Request.Analyzer.RegexAnalyzer import RegexAnalyzer
+from src.App.Token.RegexTokenizer import RegexTokenizer
 
 
-class TestAnalyzer(TestCase):
-    """"Tests the Query Analyzer"""
+class testRegexTokenizer(TestCase):
+    """"Tests the Query Token"""
 
     def test_resolve_command_type(self):
         """Tests the method that resolves the query to a command type"""
@@ -20,11 +20,11 @@ class TestAnalyzer(TestCase):
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 # Set up
-                analyzer = RegexAnalyzer()
+                tokenizer = RegexTokenizer()
 
                 # Exercise
-                pattern_type = analyzer.resolve_pattern_type(data_provider[test_number]["sample_query"])
+                tokens = tokenizer.tokenize(data_provider[test_number]["sample_query"])
 
                 # Verify
-                self.assertEqual(pattern_type, data_provider[test_number]["resolved_command_type"])
+                self.assertEqual(tokens.get_pattern_type(), data_provider[test_number]["resolved_command_type"])
 
