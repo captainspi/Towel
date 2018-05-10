@@ -1,5 +1,8 @@
 from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
+
+from src.Numerals.Exception import RomanToArabicValueConverterException
+from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
 
 
@@ -7,7 +10,7 @@ class TestRomanToArabicValueConverter(TestCase):
     """"Tests the Roman to Arabic value converter"""
 
     @patch('src.Numerals.Bag.RomanNumeralsBag.RomanNumeralsBag')
-    def testConvertToArabicValue(self, roman_numerals_bag_mock_class: MagicMock):
+    def test_convert_to_arabic_alue(self, roman_numerals_bag_mock_class: MagicMock):
         """Tests the method that converts Roman Numerals to the Arabic counterpart"""
         data_provider = [
             {"roman_numerals_bag_mock_output": ['I', None], "expected_converted_value": 1},
@@ -29,10 +32,22 @@ class TestRomanToArabicValueConverter(TestCase):
                 expected_get_last_numeral_calls = [call(), call()]
 
                 # Exercise
-                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock)
+                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock, RomanToArabicValueMapper())
                 converted_value = to_arabic_value_converter.convert()
 
                 # Verify
                 roman_numerals_bag_mock.get_last_numeral.assert_has_calls(expected_get_last_numeral_calls)
                 self.assertEqual(converted_value, data_provider[test_number]["expected_converted_value"])
+
+    @patch('src.Numerals.Bag.RomanNumeralsBag.RomanNumeralsBag')
+    def test_roman_to_arabic_value_converter_exception(self, roman_numerals_bag_mock_class: MagicMock):
+        """Tests the convert method for an exception upon providing invalid numerals in a bag"""
+        with self.assertRaises(RomanToArabicValueConverterException) as context:
+                # Set up
+                roman_numerals_bag_mock = roman_numerals_bag_mock_class()
+                roman_numerals_bag_mock.get_last_numeral.side_effect = 'Z'
+
+                # Exercise
+                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock, RomanToArabicValueMapper())
+                to_arabic_value_converter.convert()
 
