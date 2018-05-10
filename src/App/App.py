@@ -1,8 +1,7 @@
 from src.Bank.Bank import Bank
-from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
 from src.Numerals.Mapper.Mapper import Mapper
-from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
+from src.Utils.Factory import NumeralsFactory
 from src.Utils.Token.RegexTokenizer import RegexTokenizer
 from src.Utils.Token.Tokens import Tokens
 from src.Bank.Money.Money import Money
@@ -10,10 +9,11 @@ from src.Bank.Money.Money import Money
 
 class App:
     """This is where all the magic happens!"""
-    def __init__(self, mapper: Mapper, bank: Bank):
+    def __init__(self, mapper: Mapper, bank: Bank, numerals_factory: NumeralsFactory):
         """Constructor"""
         self.__mapper = mapper
         self.__bank = bank
+        self.__numerals_factory = numerals_factory
 
     def execute(self, tokens: Tokens):
         """This is where all the magic is orchestrated!"""
@@ -40,10 +40,10 @@ class App:
 
     def __calculate_arabic_value(self, intergalactic_numerals: list) -> int:
         """This function calculates the arabic value of intergalactic numerals"""
-        roman_numeral_bag = RomanNumeralsBag()
+        roman_numeral_bag = self.__numerals_factory.create_roman_numerals_bag()
         for intergalactic_numeral in intergalactic_numerals:
             roman_numeral_bag.append_numeral(self.__mapper.get_mapped_numeral(intergalactic_numeral))
-        return RomanToArabicValueConverter(roman_numeral_bag, RomanToArabicValueMapper()).convert()
+        return RomanToArabicValueConverter(roman_numeral_bag, self.__numerals_factory.create_roman_to_arabic_numerals_mapper()).convert()
 
     def __calculate_monetary_value(self, intergalactic_numerals: list, from_currency: str, to_currency: str='credits') -> Money:
         """This function calculates the monetary value of intergalactic numerals"""
