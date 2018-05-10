@@ -1,7 +1,7 @@
 import re
 from typing import Optional
-from src.App.Token.Tokens import Tokens
-from src.App.Token.Tokenizer import Tokenizer
+from src.Utils.Token.Tokens import Tokens
+from src.Utils.Token.Tokenizer import Tokenizer
 
 
 class RegexTokenizer(Tokenizer):

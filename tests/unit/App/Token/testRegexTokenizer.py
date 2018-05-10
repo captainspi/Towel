@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.App.Token.RegexTokenizer import RegexTokenizer
+from src.Utils.Token.RegexTokenizer import RegexTokenizer
 
 
 class TestRegexTokenizer(TestCase):
