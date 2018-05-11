@@ -1,3 +1,5 @@
+from src.App.View.ErrorView import ErrorView
+from src.App.View.View import View
 from src.Bank.Bank import Bank
 from src.Numerals.Mapper.Mapper import Mapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
@@ -22,11 +24,16 @@ class App:
         elif tokens.get_pattern_type() == RegexTokenizer.INITIALIZE_CURRENCY_RATE_PATTERN:
             self.__calculate_exchange_rate_for_alien_units(tokens.get_currency(), 'credits', tokens.get_numerals(), tokens.get_value())
         elif tokens.get_pattern_type() == RegexTokenizer.CONVERT_TO_ARABIC_NUMERAL_PATTERN:
-            arabic_value = self.__calculate_arabic_value(tokens.get_numerals())
-            print(int(arabic_value))
+            intergalactic_numerals = tokens.get_numerals()
+            arabic_value = self.__calculate_arabic_value(intergalactic_numerals)
+            print(View(" ".join(intergalactic_numerals), arabic_value))
         elif tokens.get_pattern_type() == RegexTokenizer.CONVERT_MONEY_PATTERN:
-            money = self.__calculate_monetary_value(tokens.get_numerals(), tokens.get_currency())
-            print(int(money.get_amount()))
+            intergalactic_numerals = tokens.get_numerals()
+            currency = tokens.get_currency()
+            money = self.__calculate_monetary_value(intergalactic_numerals, currency)
+            print(View(" ".join(intergalactic_numerals), int(money.get_amount()), currency, money.get_currency()))
+        else:
+            print(ErrorView())
 
     def __map_intergalactic_numerals_to_roman_numbers(self, map_from: str, map_to: str) -> None:
         """This function maps intergalactic numerals to roman counterparts"""
