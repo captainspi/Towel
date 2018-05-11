@@ -38,7 +38,6 @@ class TestRomanToArabicValueConverter(TestCase):
                 # Verify
                 self.assertEqual(converted_value, data_provider[test_number]["expected_converted_value"])
 
-
     def test_roman_to_arabic_value_converter_exception(self):
         """Tests the convert method for an exception upon providing invalid numerals in a bag"""
         with self.assertRaises(RomanToArabicValueConverterException) as context:
