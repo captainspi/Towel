@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
-from src.App.Token.Tokens import Tokens
+from src.Utils.Token.Tokens import Tokens
 
 
 class Tokenizer(ABC):

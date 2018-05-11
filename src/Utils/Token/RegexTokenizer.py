@@ -1,7 +1,7 @@
 import re
 from typing import Optional
-from src.App.Token.Tokens import Tokens
-from src.App.Token.Tokenizer import Tokenizer
+from src.Utils.Token.Tokens import Tokens
+from src.Utils.Token.Tokenizer import Tokenizer
 
 
 class RegexTokenizer(Tokenizer):
@@ -14,7 +14,7 @@ class RegexTokenizer(Tokenizer):
         if match:
             from_numeral = match.group(1).strip().upper()
             to_numeral = match.group(2).strip().upper()
-            return Tokens(self.MAP_TO_ROMAN_NUMERAL_PATTERN, mapped_numeral={"from_numeral": from_numeral, "to_numeral": to_numeral})
+            return Tokens(self.MAP_TO_ROMAN_NUMERAL_PATTERN, mapped_from_numeral=from_numeral, mapped_to_numeral=to_numeral)
 
         return None
 

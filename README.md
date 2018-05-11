@@ -8,13 +8,21 @@
    URL to repo: https://github.com/captainspi/Towel
 
    ```
-
  * Launch in a dockerized environment
+    ```
+    docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:1.0.1 /bin/bash -c "PYTHONPATH=./ python3 src/Main.py --filename=sample_logs"
    ```
-    docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:0.0.2 /bin/bash
-   ```
+ 
+ * Add your own input file
+   * Please copy your input file to ./assets/logs
+   * Don't forget to pass the --filename when you execute the program :)
+ 
 
 ### Running the unittests
   ```
-  docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:0.0.2 /bin/bash -c "python -m unittest discover" 
+  docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:1.0.1 /bin/bash -c "python3 -m unittest discover" 
+  ```
+### Generating codecoverage
+  ```
+  docker run -it --rm -v "{pathToDirectory}/Towel":"/usr/src/app" omaransari1/towel-app:1.0.1 /bin/bash -c "python3 -m coverage html --rcfile=tests/unit/coverage.ini" 
   ```
