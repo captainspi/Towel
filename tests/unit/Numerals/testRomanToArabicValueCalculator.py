@@ -1,53 +1,53 @@
 from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 
+from src.Numerals.Bag.RomanNumeralsBag import RomanNumeralsBag
 from src.Numerals.Exception import RomanToArabicValueConverterException
 from src.Numerals.Mapper.RomanToArabicValueMapper import RomanToArabicValueMapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
+from src.Numerals.Validator.RomanNumeralsValidator import RomanNumeralsValidator
 
 
 class TestRomanToArabicValueConverter(TestCase):
     """"Tests the Roman to Arabic value converter"""
 
-    @patch('src.Numerals.Bag.RomanNumeralsBag.RomanNumeralsBag')
-    def test_convert_to_arabic_alue(self, roman_numerals_bag_mock_class: MagicMock):
+    def test_convert_to_arabic_value(self):
         """Tests the method that converts Roman Numerals to the Arabic counterpart"""
         data_provider = [
-            {"roman_numerals_bag_mock_output": ['I', None], "expected_converted_value": 1},
-            {"roman_numerals_bag_mock_output": ['V', None], "expected_converted_value": 5},
-            {"roman_numerals_bag_mock_output": ['X', None], "expected_converted_value": 10},
-            {"roman_numerals_bag_mock_output": ['L', None], "expected_converted_value": 50},
-            {"roman_numerals_bag_mock_output": ['C', None], "expected_converted_value": 100},
-            {"roman_numerals_bag_mock_output": ['D', None], "expected_converted_value": 500},
-            {"roman_numerals_bag_mock_output": ['M', None], "expected_converted_value": 1000},
-            {"roman_numerals_bag_mock_output": ['L', 'X', None], "expected_converted_value": 40},
-            {"roman_numerals_bag_mock_output": ['V', 'I', "L", "X", "M", "C", "M", None], "expected_converted_value": 1944},
-            {"roman_numerals_bag_mock_output": [None], "expected_converted_value": 0}
+            {"roman_numerals_bag_mock_output": ['I'], "expected_converted_value": 1},
+            {"roman_numerals_bag_mock_output": ['V'], "expected_converted_value": 5},
+            {"roman_numerals_bag_mock_output": ['X'], "expected_converted_value": 10},
+            {"roman_numerals_bag_mock_output": ['L'], "expected_converted_value": 50},
+            {"roman_numerals_bag_mock_output": ['C'], "expected_converted_value": 100},
+            {"roman_numerals_bag_mock_output": ['D'], "expected_converted_value": 500},
+            {"roman_numerals_bag_mock_output": ['M'], "expected_converted_value": 1000},
+            {"roman_numerals_bag_mock_output": ['X', 'L'], "expected_converted_value": 40},
+            {"roman_numerals_bag_mock_output": ['M', 'C', 'M', 'X', 'L', 'I', 'V'], "expected_converted_value": 1944},
         ]
         for test_number in range(data_provider.__len__()):
             with self.subTest(i=test_number):
                 # Set up
-                roman_numerals_bag_mock = roman_numerals_bag_mock_class()
-                roman_numerals_bag_mock.get_last_numeral.side_effect = data_provider[test_number]["roman_numerals_bag_mock_output"]
-                expected_get_last_numeral_calls = [call(), call()]
+                roman_numerals_bag = RomanNumeralsBag()
+                for numeral in data_provider[test_number]["roman_numerals_bag_mock_output"]:
+                    roman_numerals_bag.append_numeral(numeral)
 
                 # Exercise
-                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock, RomanToArabicValueMapper())
+                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag, RomanToArabicValueMapper(), RomanNumeralsValidator())
                 converted_value = to_arabic_value_converter.convert()
 
                 # Verify
-                roman_numerals_bag_mock.get_last_numeral.assert_has_calls(expected_get_last_numeral_calls)
                 self.assertEqual(converted_value, data_provider[test_number]["expected_converted_value"])
 
-    @patch('src.Numerals.Bag.RomanNumeralsBag.RomanNumeralsBag')
-    def test_roman_to_arabic_value_converter_exception(self, roman_numerals_bag_mock_class: MagicMock):
+
+    def test_roman_to_arabic_value_converter_exception(self):
         """Tests the convert method for an exception upon providing invalid numerals in a bag"""
         with self.assertRaises(RomanToArabicValueConverterException) as context:
                 # Set up
-                roman_numerals_bag_mock = roman_numerals_bag_mock_class()
-                roman_numerals_bag_mock.get_last_numeral.side_effect = 'Z'
+                roman_numerals_bag = RomanNumeralsBag()
+                roman_numerals_bag.append_numeral('I')
+                roman_numerals_bag.append_numeral('M')
 
                 # Exercise
-                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag_mock, RomanToArabicValueMapper())
+                to_arabic_value_converter = RomanToArabicValueConverter(roman_numerals_bag, RomanToArabicValueMapper(), RomanNumeralsValidator())
                 to_arabic_value_converter.convert()
 
