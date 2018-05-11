@@ -3,7 +3,6 @@ from src.App.View.View import View
 from src.Bank.Bank import Bank
 from src.Numerals.Mapper.Mapper import Mapper
 from src.Numerals.RomanToArabicValueConverter import RomanToArabicValueConverter
-from src.Numerals.Validator.RomanNumeralsValidator import RomanNumeralsValidator
 from src.Utils.Factory import NumeralsFactory
 from src.Utils.Token.RegexTokenizer import RegexTokenizer
 from src.Utils.Token.Tokens import Tokens
@@ -51,7 +50,8 @@ class App:
         roman_numeral_bag = self.__numerals_factory.create_roman_numerals_bag()
         for intergalactic_numeral in intergalactic_numerals:
             roman_numeral_bag.append_numeral(self.__mapper.get_mapped_numeral(intergalactic_numeral))
-        return RomanToArabicValueConverter(roman_numeral_bag, self.__numerals_factory.create_roman_to_arabic_numerals_mapper(), RomanNumeralsValidator()).convert()
+            """TODO: refactor RomanToArabicValueConverter to remove side effect"""
+        return RomanToArabicValueConverter(roman_numeral_bag, self.__numerals_factory.create_roman_to_arabic_numerals_mapper(), self.__numerals_factory.create_roman_numerals_validator()).convert()
 
     def __calculate_monetary_value(self, intergalactic_numerals: list, from_currency: str, to_currency: str='credits') -> Money:
         """This function calculates the monetary value of intergalactic numerals"""
